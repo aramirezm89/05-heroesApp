@@ -1,7 +1,6 @@
 using HeroeAPI.Modelos;
 using HeroeAPI.Repositorio;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HeroeAPI.Controllers
@@ -15,7 +14,7 @@ namespace HeroeAPI.Controllers
     [HttpGet]
     public async Task<IActionResult> GetAllHeroes()
     {
-      return  Ok(await db.GetAllHeroes());
+      return Ok(await db.GetAllHeroes());
     }
 
     [HttpGet("{id}")]
@@ -24,14 +23,14 @@ namespace HeroeAPI.Controllers
       return Ok(await db.GetHeroeById(id));
     }
     [HttpPost]
-    public async Task<IActionResult> CreateHeroe([FromBody]Heroe heroe)
+    public async Task<IActionResult> CreateHeroe([FromBody] Heroe heroe)
     {
-      if(heroe == null)
+      if (heroe == null)
       {
         return BadRequest();
       }
 
-      if(heroe.Nombre == string.Empty)
+      if (heroe.superhero == string.Empty)
       {
         ModelState.AddModelError("Nombre", "falta nombre del heroe");
 
@@ -43,16 +42,16 @@ namespace HeroeAPI.Controllers
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateHeroe([FromBody] Heroe heroe,string id)
+    public async Task<IActionResult> UpdateHeroe([FromBody] Heroe heroe, string id)
     {
       if (heroe == null)
       {
         return BadRequest();
       }
 
-      if (heroe.Nombre == string.Empty)
+      if (heroe.superhero == string.Empty)
       {
-        ModelState.AddModelError("Nombre", "falta nombre del heroe");
+        ModelState.AddModelError("SuperHero", "falta nombre del SuperHeroe");
 
       }
 

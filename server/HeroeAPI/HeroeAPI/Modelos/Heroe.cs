@@ -7,8 +7,14 @@ namespace HeroeAPI.Modelos
   {
     [BsonId]
     public ObjectId Id { get; set; }
-    public string Nombre { get; set; }
-    public bool Vuela { get; set; }
-    public string Color { get; set; }
+
+    public string superhero { get; set; }
+
+    public string publisher { get; set; }
+    public string alter_ego { get; set; }
+
+    public string first_appearance { get; set; }
+
+    public string characters { get; set; }
   }
 }

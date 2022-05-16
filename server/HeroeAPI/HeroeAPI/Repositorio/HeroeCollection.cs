@@ -39,7 +39,7 @@ namespace HeroeAPI.Repositorio
 
     public async Task UpdateHeroe(Heroe heroe)
     {
-      var filter  = Builders<Heroe>.Filter.Eq(s => s.Id, heroe.Id);
+      var filter = Builders<Heroe>.Filter.Eq(s => s.Id, heroe.Id);
 
       await Collection.ReplaceOneAsync(filter, heroe);
     }
