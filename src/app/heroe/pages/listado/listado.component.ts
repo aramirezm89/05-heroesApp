@@ -16,6 +16,7 @@ export class ListadoComponent implements OnInit {
     this.heroesService.getHeroes().subscribe({
       next:(response) => {
         this.listadoHeroes = response
+        console.log(this.listadoHeroes)
       },
       error:(err) => {
         console.log(err)
