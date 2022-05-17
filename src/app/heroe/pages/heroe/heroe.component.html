@@ -1,1 +1,42 @@
-<p>heroe works!</p>
+<!-- spiner -->
+<div  flexLayout="column "
+      fxLayoutAlign="center center"
+      *ngIf="!heroe; else divHeroe"
+      >
+    <mat-spinner></mat-spinner>
+</div>
+<!-- fin spiner -->
+
+<!-- contenido -->
+<ng-template #divHeroe>
+  <div fxLayout="row"
+       fxLayout.xs="column"
+       fxLayoutAlign="center "
+       fxLayoutGap="30px">
+
+       <div fxFlex="40" class="divImagenHeroe">
+            <h1>{{heroe.superhero}} <small>- {{heroe.alter_ego}}</small></h1>
+            <mat-divider></mat-divider>
+            <br/>
+            <img [src]="heroe | imagen" [alt]="heroe.superhero">
+       </div>
+       <div fxFlex="40" class="divInfoHeroe">
+          <h1>{{heroe.publisher}}</h1>
+          <mat-divider></mat-divider>
+
+
+          <mat-list>
+              <mat-list-item>Primera Aparición: {{heroe.first_appearance}}</mat-list-item>
+              <mat-list-item>Personajes: {{heroe.characters}}</mat-list-item>
+              <mat-list-item>Primera Aparición: {{heroe.first_appearance}}</mat-list-item>
+              <mat-list-item>Editorial: {{heroe.publisher}}</mat-list-item>
+          </mat-list>
+
+          <button mat-raised-button color="accent"
+                  routerLink="/heroe/listado">
+                  Regresar</button>
+
+       </div>
+  </div>
+</ng-template>
+<!-- fin contenido -->

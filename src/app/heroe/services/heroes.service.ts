@@ -14,4 +14,9 @@ export class HeroesService {
     const URL = `${this.BaseUrl}heroe`;
     return this.http.get<Heroe[]>(URL);
   }
+
+  getHeroePorId(id : string):Observable<Heroe>{
+    const URL =  `${this.BaseUrl}heroe/${id}`;
+    return this.http.get<Heroe>(URL);
+  }
 }

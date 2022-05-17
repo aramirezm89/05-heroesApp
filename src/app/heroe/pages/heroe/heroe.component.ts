@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Heroe } from '../../interfaces/heroe.interfaces';
+import { HeroesService } from '../../services/heroes.service';
 
 @Component({
   selector: 'app-heroe',
@@ -9,12 +11,17 @@ import { map } from 'rxjs/operators';
 })
 export class HeroeComponent implements OnInit {
 
-
-  constructor(private route: ActivatedRoute) {}
+  heroe! : Heroe;
+  constructor(private route: ActivatedRoute, private heroeService : HeroesService) {}
 
   ngOnInit(): void {
-      this.route.params.subscribe({
-        next: ({id}) => console.log(id)
-      })
+    this.route.params.pipe(
+      switchMap(({ id }) => this.heroeService.getHeroePorId(id)), //switchMap toma el valor del observable anterior y debe retornar otro observable
+    ).subscribe({
+      next: (responseHeroe) =>{
+        this.heroe = responseHeroe;
+      },
+      error: (err) => console.log(err)
+    })
   }
 }
