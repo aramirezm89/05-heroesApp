@@ -1,1 +1,116 @@
-<p>agregar works!</p>
+<div
+  fxLayout="row "
+  fxLayoutGap="40px"
+  fxLayout.xs="column"
+  fxLayoutAlign="center center"
+>
+<div fxFlex="50" fxLayout="column">
+
+
+  <h2>Nuevo Héroe: {{ nombreHeroe }}</h2>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-form-field fxFlex="40">
+        <mat-label>Super Heroe</mat-label>
+        <input matInput type="text" [(ngModel)]="nombreHeroe" required />
+        <button
+          *ngIf="nombreHeroe"
+          matSuffix
+          mat-icon-button
+          aria-label="superheroe"
+          (click)="nombreHeroe = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="40">
+        <mat-label>Alter Ego</mat-label>
+        <input matInput type="text" required />
+        <button
+          *ngIf="nombreHeroe"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="nombreHeroe = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Primera Aparición</mat-label>
+      <input matInput type="text" required />
+      <button
+        *ngIf="nombreHeroe"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="nombreHeroe = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Personajes</mat-label>
+      <input matInput type="text" required />
+      <button
+        *ngIf="nombreHeroe"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="nombreHeroe = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Personajes</mat-label>
+      <input matInput type="text" required />
+      <button
+        *ngIf="nombreHeroe"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="nombreHeroe = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Editoriales</mat-label>
+      <mat-select required>
+        <mat-option *ngFor="let publish of publishers" [value]="publish.id">
+          {{ publish.id }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Foto Url</mat-label>
+      <input matInput type="url" required />
+      <button
+        *ngIf="nombreHeroe"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="nombreHeroe = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+  </div>
+
+  <div fxFlex="50">
+    <img [src]="heroe | imagen" alt="foto" />
+  </div>
+</div>

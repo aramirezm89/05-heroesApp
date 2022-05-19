@@ -1,22 +1,30 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Heroe } from '../interfaces/heroe.interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroesService {
-  private BaseUrl : string = 'https://localhost:44383/api/'
+  private BaseUrl : string = environment.baseUrl;
+
   constructor(private http : HttpClient ) { }
 
   getHeroes():Observable<Heroe[]>{
-    const URL = `${this.BaseUrl}heroe`;
+    const URL = `${this.BaseUrl}/heroe`;
     return this.http.get<Heroe[]>(URL);
   }
 
   getHeroePorId(id : string):Observable<Heroe>{
-    const URL =  `${this.BaseUrl}heroe/${id}`;
+    const URL =  `${this.BaseUrl}/heroe/${id}`;
     return this.http.get<Heroe>(URL);
+  }
+
+  getHeroeFiltroSuperHero(termino : string):Observable<Heroe[]>{
+    const URL = `${this.BaseUrl}/heroe/filtro`;
+    const params = new HttpParams().set('nombre', termino);
+    return this.http.get<Heroe[]>(URL, { params });
   }
 }
