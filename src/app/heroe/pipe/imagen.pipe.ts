@@ -8,13 +8,14 @@ export class ImagenPipe implements PipeTransform {
 
   transform(heroe : Heroe): string {
 
-    if(heroe.imageId === undefined){
-          return `assets/no-image.png`;
+    if(heroe.imageId === undefined  || heroe.imageId?.length ===0){
+      return `assets/no-image.png`;
     }
 
+    if(heroe.imageId.includes("http")){
+      return heroe.imageId;
+    }
     return `assets/heroes/${heroe.imageId}.jpg`;
-
-
 
   }
 

@@ -9,27 +9,29 @@
 
 <!-- contenido -->
 <ng-template #divHeroe>
-  <div fxLayout="row"
+  <div
+      class="animate__animated  animate__zoomIn"
+      fxLayout="row"
        fxLayout.xs="column"
        fxLayoutAlign="center "
        fxLayoutGap="30px">
 
        <div fxFlex="40" class="divImagenHeroe">
-            <h1>{{heroe.superhero}} <small>- {{heroe.alter_ego}}</small></h1>
+            <h1>{{heroe.superhero | titlecase}} <small>- {{heroe.alter_ego | titlecase}}</small></h1>
             <mat-divider></mat-divider>
             <br/>
             <img [src]="heroe | imagen" [alt]="heroe.superhero">
        </div>
        <div fxFlex="40" class="divInfoHeroe">
-          <h1>{{heroe.publisher}}</h1>
+          <h1>{{heroe.publisher | titlecase}}</h1>
           <mat-divider></mat-divider>
 
 
           <mat-list>
-              <mat-list-item>Primera Aparición: {{heroe.first_appearance}}</mat-list-item>
-              <mat-list-item>Personajes: {{heroe.characters}}</mat-list-item>
-              <mat-list-item>Primera Aparición: {{heroe.first_appearance}}</mat-list-item>
-              <mat-list-item>Editorial: {{heroe.publisher}}</mat-list-item>
+              <mat-list-item>Primera Aparición: {{heroe.first_appearance | titlecase}}</mat-list-item>
+              <mat-list-item>Personajes: {{heroe.characters | titlecase}}</mat-list-item>
+              <mat-list-item>Primera Aparición: {{heroe.first_appearance | titlecase}}</mat-list-item>
+              <mat-list-item>Editorial: {{heroe.publisher | titlecase}}</mat-list-item>
           </mat-list>
 
           <button mat-raised-button color="accent"

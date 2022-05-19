@@ -1,24 +1,35 @@
 <div
   fxLayout="row "
   fxLayoutGap="40px"
+  fxLayoutGap.xs="20"
   fxLayout.xs="column"
   fxLayoutAlign="center center"
 >
-<div fxFlex="50" fxLayout="column">
+  <div fxFlex="50"  fxLayout="column">
+    <div *ngIf="actualizar === false; else agregar">
+      <h2>Nuevo Héroe: {{ heroe.superhero }}</h2>
+    </div>
 
+    <ng-template #agregar>
+      <h2>Actualizar Héroe: {{ heroe.superhero }}</h2>
+    </ng-template>
 
-  <h2>Nuevo Héroe: {{ nombreHeroe }}</h2>
-
-    <div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="space-between">
       <mat-form-field fxFlex="40">
         <mat-label>Super Heroe</mat-label>
-        <input matInput type="text" [(ngModel)]="nombreHeroe" required />
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="heroe.superhero"
+          required
+          maxlength="50"
+        />
         <button
-          *ngIf="nombreHeroe"
+          *ngIf="heroe.superhero"
           matSuffix
           mat-icon-button
           aria-label="superheroe"
-          (click)="nombreHeroe = ''"
+          (click)="heroe.superhero = ''"
         >
           <mat-icon>close</mat-icon>
         </button>
@@ -26,13 +37,19 @@
 
       <mat-form-field fxFlex="40">
         <mat-label>Alter Ego</mat-label>
-        <input matInput type="text" required />
+        <input
+          [(ngModel)]="heroe.alter_ego"
+          matInput
+          type="text"
+          required
+          maxlength="50"
+        />
         <button
-          *ngIf="nombreHeroe"
+          *ngIf="heroe.alter_ego"
           matSuffix
           mat-icon-button
           aria-label="Clear"
-          (click)="nombreHeroe = ''"
+          (click)="heroe.alter_ego = ''"
         >
           <mat-icon>close</mat-icon>
         </button>
@@ -41,13 +58,19 @@
 
     <mat-form-field>
       <mat-label>Primera Aparición</mat-label>
-      <input matInput type="text" required />
+      <input
+        [(ngModel)]="heroe.first_appearance"
+        matInput
+        type="text"
+        required
+        maxlength="50"
+      />
       <button
-        *ngIf="nombreHeroe"
+        *ngIf="heroe.first_appearance"
         matSuffix
         mat-icon-button
         aria-label="Clear"
-        (click)="nombreHeroe = ''"
+        (click)="heroe.first_appearance = ''"
       >
         <mat-icon>close</mat-icon>
       </button>
@@ -55,27 +78,19 @@
 
     <mat-form-field>
       <mat-label>Personajes</mat-label>
-      <input matInput type="text" required />
+      <input
+        [(ngModel)]="heroe.characters"
+        matInput
+        type="text"
+        required
+        maxlength="100"
+      />
       <button
-        *ngIf="nombreHeroe"
+        *ngIf="heroe.characters"
         matSuffix
         mat-icon-button
         aria-label="Clear"
-        (click)="nombreHeroe = ''"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Personajes</mat-label>
-      <input matInput type="text" required />
-      <button
-        *ngIf="nombreHeroe"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="nombreHeroe = ''"
+        (click)="heroe.characters = ''"
       >
         <mat-icon>close</mat-icon>
       </button>
@@ -83,7 +98,7 @@
 
     <mat-form-field>
       <mat-label>Editoriales</mat-label>
-      <mat-select required>
+      <mat-select required [(ngModel)]="heroe.publisher">
         <mat-option *ngFor="let publish of publishers" [value]="publish.id">
           {{ publish.id }}
         </mat-option>
@@ -92,22 +107,33 @@
 
     <mat-form-field>
       <mat-label>Foto Url</mat-label>
-      <input matInput type="url" required />
+      <input [(ngModel)]="heroe.imageId" matInput type="url" required />
       <button
-        *ngIf="nombreHeroe"
+        *ngIf="heroe.imageId"
         matSuffix
         mat-icon-button
         aria-label="Clear"
-        (click)="nombreHeroe = ''"
+        (click)="heroe.imageId = ''"
       >
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
     <br />
-    <button mat-raised-button color="primary">
+    <button
+      *ngIf="actualizar === false; else agregarBoton"
+      mat-raised-button
+      color="primary"
+      (click)="guardar()"
+    >
       <mat-icon>save</mat-icon>
       Guardar
     </button>
+    <ng-template #agregarBoton>
+      <button mat-raised-button color="accent" (click)="guardar()">
+        <mat-icon>edit</mat-icon>
+        Actualizar
+      </button>
+    </ng-template>
   </div>
 
   <div fxFlex="50">

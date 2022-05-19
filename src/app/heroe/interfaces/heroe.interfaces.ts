@@ -6,7 +6,7 @@ export interface Heroe {
   first_appearance: string;
   characters: string;
   imageId?: string;
-  alt_img: string;
+  alt_img?: string;
 }
 
 
