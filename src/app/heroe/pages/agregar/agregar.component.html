@@ -1,12 +1,12 @@
 <div
   fxLayout="row "
-  fxLayoutGap="40px"
+  fxLayoutGap="30px"
   fxLayoutGap.xs="20"
   fxLayout.xs="column"
   fxLayoutAlign="center center"
 >
-  <div fxFlex="50"  fxLayout="column">
-    <div *ngIf="actualizar === false; else agregar">
+  <div fxFlex="50" fxLayout="column">
+    <div *ngIf="!heroe.id; else agregar">
       <h2>Nuevo Héroe: {{ heroe.superhero }}</h2>
     </div>
 
@@ -14,7 +14,7 @@
       <h2>Actualizar Héroe: {{ heroe.superhero }}</h2>
     </ng-template>
 
-    <div fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="space-between">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between">
       <mat-form-field fxFlex="40">
         <mat-label>Super Heroe</mat-label>
         <input
@@ -120,7 +120,7 @@
     </mat-form-field>
     <br />
     <button
-      *ngIf="actualizar === false; else agregarBoton"
+      *ngIf="!heroe.id; else agregarBoton"
       mat-raised-button
       color="primary"
       (click)="guardar()"
@@ -129,14 +129,23 @@
       Guardar
     </button>
     <ng-template #agregarBoton>
-      <button mat-raised-button color="accent" (click)="guardar()">
-        <mat-icon>edit</mat-icon>
-        Actualizar
-      </button>
+      <div fxLayout="row" fxLayoutGap.xs="10" fxLayout.xs="column" fxLayoutAlign="space-between">
+
+          <button fxFlex="40" mat-raised-button color="accent" (click)="guardar()">
+            <mat-icon>edit</mat-icon>
+            Actualizar
+          </button>
+
+          <button  fxFlex="40"  mat-raised-button color="warn" (click)="eliminar()">
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+
+      </div>
     </ng-template>
   </div>
 
-  <div fxFlex="50">
+  <div fxFlex="50"  fxLayoutAlign="center center">
     <img [src]="heroe | imagen" alt="foto" />
   </div>
 </div>

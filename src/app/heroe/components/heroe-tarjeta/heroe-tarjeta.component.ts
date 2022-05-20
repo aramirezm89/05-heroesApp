@@ -8,7 +8,10 @@ import { Heroe } from '../../interfaces/heroe.interfaces';
 })
 export class HeroeTarjetaComponent implements OnInit {
   @Input() heroe!: Heroe;
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 }

@@ -11,7 +11,7 @@ import { HeroesService } from '../../services/heroes.service';
 export class AgregarComponent implements OnInit {
   publishers = [
     {
-      id: 'Dc Comics',
+      id: 'DC Comics',
       desc: 'DC Comics',
     },
     {
@@ -19,8 +19,7 @@ export class AgregarComponent implements OnInit {
       desc: 'Marvel Comics',
     },
   ];
-  actualizar: boolean = false;
-  idHeroeBD! : string;
+
   heroe: Heroe = {
     superhero: '',
     alter_ego: '',
@@ -39,9 +38,7 @@ export class AgregarComponent implements OnInit {
     this.route.params.subscribe({
       next: ({ id }) => {
         if (id) {
-          this.actualizar = true;
-          this.idHeroeBD = id;
-          this.heroeSerive.getHeroePorId(this.idHeroeBD).subscribe({
+          this.heroeSerive.getHeroePorId(id).subscribe({
             next: (response) => {
               this.heroe = response;
             },
@@ -52,15 +49,14 @@ export class AgregarComponent implements OnInit {
   }
 
   guardar() {
-    if (!this.actualizar) {
+    if (!this.heroe.id) {
       if (this.heroe.superhero.trim().length === 0) {
         return;
       }
 
       this.heroeSerive.insertHeroe(this.heroe).subscribe({
         next: ({ id }) => {
-          console.log(id);
-          if ({ id }) {
+          if (id) {
             this.router.navigate([`/heroe/ver-heroe/${id}`]);
           } else {
             console.log(
@@ -79,31 +75,26 @@ export class AgregarComponent implements OnInit {
         publisher: Publisher.DCComics,
         imageId: '',
       };
-    }else{
+    } else {
+      if (this.heroe.superhero.trim().length === 0) {
+        return;
+      }
 
-       if (this.heroe.superhero.trim().length === 0) {
-         return;
-       }
-
-       this.heroeSerive.updateHeroe(this.heroe,this.idHeroeBD).subscribe({
-         next: (response) => {
-           console.log(response);
-
-          this.router.navigate([`/heroe/ver-heroe/${this.idHeroeBD}`]);
-
-         },
-         error: (err) => console.log(err),
-       });
-
-       this.heroe = {
-         superhero: '',
-         alter_ego: '',
-         characters: '',
-         first_appearance: '',
-         publisher: Publisher.DCComics,
-         imageId: '',
-       };
-
+      this.heroeSerive.updateHeroe(this.heroe, this.heroe.id).subscribe({
+        next: () => {
+          this.router.navigate([`/heroe/ver-heroe/${this.heroe.id}`]);
+        },
+        error: (err) => console.log(err),
+      });
     }
+  }
+
+  eliminar() {
+    this.heroeSerive.deleteHeroe(this.heroe.id!).subscribe({
+      next: (response) => {
+        this.router.navigate(['/heroe']);
+      },
+      error: (err) => console.log(err),
+    });
   }
 }
