@@ -9,7 +9,7 @@ import { HeroesService } from '../../services/heroes.service';
 })
 export class ListadoComponent implements OnInit {
 
-  listadoHeroes : Heroe[] = []
+  listadoHeroes! : Heroe[] ;
   constructor(private heroesService : HeroesService) { }
 
   ngOnInit(): void {
@@ -19,8 +19,11 @@ export class ListadoComponent implements OnInit {
       },
       error:(err) => {
         console.log(err)
+           console.log(this.listadoHeroes);
       }
     });
+
+
   }
 
 }

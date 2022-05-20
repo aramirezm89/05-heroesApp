@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmarComponent } from '../../components/confirmar/confirmar.component';
 import { Heroe, Publisher } from '../../interfaces/heroe.interfaces';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -31,7 +34,9 @@ export class AgregarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private heroeSerive: HeroesService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +62,7 @@ export class AgregarComponent implements OnInit {
       this.heroeSerive.insertHeroe(this.heroe).subscribe({
         next: ({ id }) => {
           if (id) {
+            this.mostrarSnackBar('Heroe Guardado', 'mat-primary');
             this.router.navigate([`/heroe/ver-heroe/${id}`]);
           } else {
             console.log(
@@ -83,6 +89,7 @@ export class AgregarComponent implements OnInit {
       this.heroeSerive.updateHeroe(this.heroe, this.heroe.id).subscribe({
         next: () => {
           this.router.navigate([`/heroe/ver-heroe/${this.heroe.id}`]);
+          this.mostrarSnackBar('Heroe actualizado', 'mat-accent');
         },
         error: (err) => console.log(err),
       });
@@ -90,11 +97,33 @@ export class AgregarComponent implements OnInit {
   }
 
   eliminar() {
-    this.heroeSerive.deleteHeroe(this.heroe.id!).subscribe({
-      next: (response) => {
-        this.router.navigate(['/heroe']);
+    const dialog = this.dialog.open(ConfirmarComponent, {
+      width: '450px',
+      data: { ...this.heroe },
+    });
+
+    //este codigo evalua el booleano enviado al cerrar el dialogo si el valor es true borra el registro.
+    dialog.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.heroeSerive.deleteHeroe(this.heroe.id!).subscribe({
+            next: () => {
+              this.router.navigate(['/heroe']);
+              this.mostrarSnackBar('Heroe Eliminado', 'mat-warn');
+            },
+            error: (err) => console.log(err),
+          });
+        }
       },
-      error: (err) => console.log(err),
+    });
+  }
+
+  mostrarSnackBar(message: string, clase: string) {
+    this.snackBar.open(message, '', {
+      duration: 2500,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+      panelClass: ['mat-toolbar', clase],
     });
   }
 }

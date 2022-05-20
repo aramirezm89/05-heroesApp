@@ -107,7 +107,7 @@
 
     <mat-form-field>
       <mat-label>Foto Url</mat-label>
-      <input [(ngModel)]="heroe.imageId" matInput type="url" required />
+      <input [(ngModel)]="heroe.imageId" matInput type="url" required/>
       <button
         *ngIf="heroe.imageId"
         matSuffix
@@ -146,6 +146,6 @@
   </div>
 
   <div fxFlex="50"  fxLayoutAlign="center center">
-    <img [src]="heroe | imagen" alt="foto" />
+    <img [src]="heroe | imagen :heroe.imageId" alt="foto" />
   </div>
 </div>

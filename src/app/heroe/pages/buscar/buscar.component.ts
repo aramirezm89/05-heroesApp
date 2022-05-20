@@ -20,7 +20,7 @@ export class BuscarComponent implements OnInit {
   buscar() {
 
     this.sinResultados = false;
-    this.heroeSeleccionado = undefined;
+    this.heroeSeleccionado = undefined;//esta linea sirve para borrar el resultado de la busqueda anterior
 
     if (this.termino.length !== 0) {
       this.heroeSerive.getHeroeFiltroSuperHero(this.termino).subscribe({

@@ -6,8 +6,7 @@ import { Heroe } from '../interfaces/heroe.interfaces';
 })
 export class ImagenPipe implements PipeTransform {
 
-  transform(heroe : Heroe): string {
-
+  transform(heroe : Heroe, image?:string): string {
     if(heroe.imageId === undefined  || heroe.imageId?.length ===0){
       return `assets/no-image.png`;
     }
@@ -15,6 +14,7 @@ export class ImagenPipe implements PipeTransform {
     if(heroe.imageId.includes("http")){
       return heroe.imageId;
     }
+
     return `assets/heroes/${heroe.imageId}.jpg`;
 
   }

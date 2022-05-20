@@ -1,13 +1,28 @@
 <h1>Listado Heroes</h1>
 <mat-divider></mat-divider>
 
-<div fxLayout="row wrap"
-     fxLayout.xs="column"
-    fxLayoutAlign="space-evenly"
+<!-- spiner -->
+<div class="mt"
+    flexLayout="column"
+    fxLayoutAlign="center center"
+    *ngIf="!listadoHeroes; else divListado"
 >
-  <div fxFlex="30"
-       fxFlex.lg="15"
-      *ngFor="let heroe of listadoHeroes">
-      <app-heroe-tarjeta [heroe]="heroe"></app-heroe-tarjeta>
-  </div>
+<div >
+      <mat-spinner ></mat-spinner>
 </div>
+</div>
+<!-- fin spiner -->
+
+<ng-template #divListado>
+  <div fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-evenly"
+    >
+    <div fxFlex="30"
+         fxFlex.lg="15"
+        *ngFor="let heroe of listadoHeroes">
+      <app-heroe-tarjeta [heroe]="heroe"></app-heroe-tarjeta>
+    </div>
+
+  </div>
+</ng-template>
