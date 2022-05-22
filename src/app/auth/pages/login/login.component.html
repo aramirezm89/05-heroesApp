@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div
+  class="contenedor-principal"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="30px"
+>
+  <div fxLayout="column" fxFlex="50" fxLayoutAlign="end center">
+    <h1>App Heroes</h1>
+    <p>Inicie sesión para comenzar su experiencia</p>
+  </div>
+
+  <div
+    fxLayout="column"
+    fxFlex="50"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10"
+  >
+
+
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Correo Electronico</mat-label>
+          <input matInput type="text" required maxlength="50" />
+          <button matSuffix mat-icon-button aria-label="superheroe">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="text" required maxlength="50" />
+          <button matSuffix mat-icon-button aria-label="superheroe">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+         <div fxLayout="column" fxLayoutGap="20px">
+          <div>
+            <button mat-raised-button color="primary" (click)="login()">
+              Ingresar
+            </button>
+          </div>
+
+           <div>
+                <mat-divider></mat-divider>
+             </div>
+
+          <div>
+            <button mat-raised-button color="accent"
+                    (click)="crearUsuario()">
+              Crear cuenta nueva
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
