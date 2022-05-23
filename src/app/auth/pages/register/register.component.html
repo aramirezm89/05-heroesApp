@@ -1,16 +1,13 @@
 <mat-dialog-content class="animate__animated animate__fadeIn">
   <div fxFlexLayout="column">
     <div fxFlex="100">
-
-      <div fxLayout="row"
-          fxLayoutAlign="space-between"
-          fxLayoutGap="10">
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10">
         <div fxLayout="column" fxFlex="50">
           <h2>Registrate:</h2>
         </div>
         <div fxLayout="column" fxFlex="10">
           <button mat-icon-button mat-dialog-close [mat-dialog-close]="false">
-           <mat-icon>close</mat-icon>
+            <mat-icon>close</mat-icon>
           </button>
         </div>
       </div>
@@ -18,24 +15,24 @@
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Nombre Usuario</mat-label>
-          <input matInput type="text" required maxlength="50" />
-          <button matSuffix mat-icon-button aria-label="superheroe">
+          <input  [(ngModel)]="usuario.usuario"  matInput  type="text" required maxlength="50"/>
+          <button matSuffix mat-icon-button aria-label="usuario" (click)="usuario.usuario = ''">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" required maxlength="50" />
-          <button matSuffix mat-icon-button aria-label="superheroe">
+          <input placeholder="Contraseña máximo 20 caracteres" [(ngModel)]="usuario.pass"  matInput type="password" required maxlength="20" />
+          <button matSuffix mat-icon-button aria-label="password">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Correo</mat-label>
-          <input matInput type="emaul" required maxlength="50" />
-          <button matSuffix mat-icon-button aria-label="superheroe">
+          <input [(ngModel)]="usuario.email"  matInput type="email" required email maxlength="50" />
+          <button matSuffix mat-icon-button aria-label="email">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>

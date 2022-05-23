@@ -13,5 +13,5 @@ export class ConfirmarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  borrar() {}
+
 }
