@@ -22,11 +22,25 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input placeholder="Contraseña máximo 20 caracteres" [(ngModel)]="usuario.pass"  matInput type="password" required maxlength="20" />
-          <button matSuffix mat-icon-button aria-label="password">
-            <mat-icon>close</mat-icon>
+          <mat-label>Contraseña</mat-label>
+          <input
+            [(ngModel)]="usuario.pass"
+            matInput
+            [type]="mostrarPass?'text':'password'"
+            placeholder="Contraseña máximo 20 caracteres"
+            required
+            maxlength="20"
+          />
+           <button
+            mat-icon-button
+            matSuffix
+            (click)="mostrarPass = !mostrarPass"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="mostrarPass"
+          >
+            <mat-icon>{{ mostrarPass ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
+
         </mat-form-field>
 
         <mat-form-field appearance="fill">

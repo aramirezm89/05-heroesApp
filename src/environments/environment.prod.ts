@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURl: 'https://localhost:44383/api',
+  baseUrl: 'https://heroeapi20220524185228.azurewebsites.net/api',
 };

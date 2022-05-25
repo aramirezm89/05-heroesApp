@@ -1,10 +1,12 @@
 .contenedor-principal {
-  margin-top: 20vh;
+  margin-top: 16vh;
 }
 
 mat-card {
   height: 40vh;
   width: 42vh;
+  min-height:270px;
+  min-width: 250px;
 }
 
 mat-form-field {

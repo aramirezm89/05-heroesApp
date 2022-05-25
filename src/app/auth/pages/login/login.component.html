@@ -5,7 +5,7 @@
   fxLayoutAlign="center center"
   fxLayoutGap="30px"
 >
-  <div fxLayout="column" fxFlex="50" fxLayoutAlign="end center">
+  <div fxLayout="column"  fxFlex="50" fxLayoutAlign="end center">
     <h1>App Heroes</h1>
     <p>Inicie sesión para comenzar su experiencia</p>
   </div>
@@ -16,39 +16,62 @@
     fxLayoutAlign="center center"
     fxLayoutGap="10"
   >
-
     <mat-card>
       <mat-card-content>
         <mat-form-field appearance="fill">
           <mat-label>Correo Electronico</mat-label>
-          <input [(ngModel)]="usuarioLogin.usuario" matInput type="text" required maxlength="50" />
-          <button matSuffix mat-icon-button aria-label="usuario" (click)="usuarioLogin.usuario = ''">
+          <input
+            [(ngModel)]="usuarioLogin.usuario"
+            matInput
+            type="text"
+            required
+            maxlength="50"
+          />
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="usuario"
+            (click)="usuarioLogin.usuario = ''"
+          >
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Contraseña</mat-label>
-          <input  [(ngModel)]="usuarioLogin.pass" matInput type="password" placeholder="Contraseña máximo 20 caracteres" required maxlength="20" />
-          <button matSuffix mat-icon-button aria-label="password" (click)="usuarioLogin.pass = ''">
-            <mat-icon>close</mat-icon>
+          <input
+            [(ngModel)]="usuarioLogin.pass"
+            matInput
+            [type]="mostrarPass?'text':'password'"
+            placeholder="Contraseña máximo 20 caracteres"
+            required
+            maxlength="20"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="mostrarPass = !mostrarPass"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="mostrarPass"
+          >
+            <mat-icon>{{ mostrarPass ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
+
         </mat-form-field>
 
-         <div fxLayout="column" fxLayoutGap="20px">
+        <div fxLayout="column" fxLayoutGap="20px">
           <div>
             <button mat-raised-button color="primary" (click)="login()">
               Ingresar
             </button>
           </div>
 
-           <div>
-                <mat-divider></mat-divider>
-             </div>
+          <div>
+            <mat-divider></mat-divider>
+          </div>
 
           <div>
-            <button mat-raised-button color="accent"
-                    (click)="crearUsuario()">
+            <button mat-raised-button color="accent" (click)="crearUsuario()">
               Crear cuenta nueva
             </button>
           </div>

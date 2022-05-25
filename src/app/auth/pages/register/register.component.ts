@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Usuario } from '../../interfaces/usuario.interfaces';
 
@@ -14,7 +15,11 @@ export class RegisterComponent implements OnInit {
     email: '',
   };
 
-  constructor(private authService: AuthService) {}
+  mostrarPass = false;
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
@@ -29,9 +34,18 @@ export class RegisterComponent implements OnInit {
 
     this.authService.insertUsuario(this.usuario).subscribe({
       next: (response) => {
-        console.log(response.usuario);
+        this.mostrarSnackBar('Usuario creado','mat-accent')
       },
-      error: (err) => console.log(err.error.errors.email[0]),
+      error: (err) => this.mostrarSnackBar(err.error.errors.email[0],'mat-warn')
+    });
+  }
+
+  mostrarSnackBar(message: string, clase: string) {
+    this.snackBar.open(message, '', {
+      duration: 2500,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+      panelClass: ['mat-toolbar', clase],
     });
   }
 }
