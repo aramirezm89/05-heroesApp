@@ -1,5 +1,8 @@
 # HeroesApp
 
+Esta aplicación maneja una especie de enciclopedia de heroes, en la cual el usuario podra introducir datos del heroe famoso que le guste y poder agregarlo
+al listado ya existente. Ademas de poder realziar operaciones tipicas como Actualizar , eliminar y buscar.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
 
 ## Development server
