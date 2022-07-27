@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Heroe } from '../interfaces/heroe.interfaces';
 
 @Injectable({
@@ -29,11 +29,13 @@ export class HeroesService {
   }
 
   insertHeroe(heroe: Heroe): Observable<Heroe> {
+    console.log(heroe);
     const URL = `${this.BaseUrl}/heroe`;
     return this.http.post<Heroe>(URL, heroe);
   }
 
   updateHeroe(heroe: Heroe,id:string): Observable<Heroe> {
+    console.log(heroe)
     const URL = `${this.BaseUrl}/heroe/${id}`;
     return this.http.put<Heroe>(URL, heroe);
   }

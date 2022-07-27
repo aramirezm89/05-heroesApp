@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,15 +24,28 @@ export class AgregarComponent implements OnInit {
     },
   ];
 
+  idHeroe: string = '';
   heroe: Heroe = {
     superhero: '',
     alter_ego: '',
     characters: '',
     first_appearance: '',
-    publisher: Publisher.DCComics,
+    publisher: Publisher.default,
     imageId: '',
   };
+
+  miFormulario: FormGroup = this.fb.group({
+    id: [''],
+    superhero: ['', [Validators.required]],
+    alter_ego: ['', [Validators.required]],
+    characters: ['', [Validators.required]],
+    first_appearance: ['', [Validators.required]],
+    publisher: ['', [Validators.required]],
+    imageId: ['', [Validators.required]],
+  });
+
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private heroeSerive: HeroesService,
     private router: Router,
@@ -45,7 +59,18 @@ export class AgregarComponent implements OnInit {
         if (id) {
           this.heroeSerive.getHeroePorId(id).subscribe({
             next: (response) => {
+              this.idHeroe = response.id!;
               this.heroe = response;
+              this.miFormulario.setValue({
+                id: this.heroe.id,
+                superhero: this.heroe.superhero,
+                alter_ego: this.heroe.alter_ego,
+                characters: this.heroe.characters,
+                first_appearance: this.heroe.first_appearance,
+                publisher: this.heroe.publisher,
+                imageId: this.heroe.imageId,
+              })
+              console.log(this.miFormulario);
             },
           });
         }
@@ -54,45 +79,44 @@ export class AgregarComponent implements OnInit {
   }
 
   guardar() {
-    if (!this.heroe.id) {
-      if (this.heroe.superhero.trim().length === 0) {
-        return;
+    if (this.miFormulario.valid) {
+      if (!this.heroe.id) {
+        this.heroeSerive.insertHeroe(this.miFormulario.value).subscribe({
+          next: ({ id }) => {
+            if (id) {
+              this.mostrarSnackBar('Heroe Guardado', 'mat-primary');
+              this.router.navigate([`/heroe/ver-heroe/${id}`]);
+            } else {
+              console.log(
+                'error de servidor, o el heroe ya se encuentra en la BD'
+              );
+            }
+          },
+          error: (err) => console.log(err),
+        });
+
+        this.heroe = {
+          superhero: '',
+          alter_ego: '',
+          characters: '',
+          first_appearance: '',
+          publisher: Publisher.DCComics,
+          imageId: '',
+        };
+      } else {
+
+
+
+        this.heroeSerive
+          .updateHeroe(this.miFormulario.value, this.idHeroe)
+          .subscribe({
+            next: () => {
+              this.router.navigate([`/heroe/ver-heroe/${this.heroe.id}`]);
+              this.mostrarSnackBar('Heroe actualizado', 'mat-accent');
+            },
+            error: (err) => console.log(err),
+          });
       }
-
-      this.heroeSerive.insertHeroe(this.heroe).subscribe({
-        next: ({ id }) => {
-          if (id) {
-            this.mostrarSnackBar('Heroe Guardado', 'mat-primary');
-            this.router.navigate([`/heroe/ver-heroe/${id}`]);
-          } else {
-            console.log(
-              'error de servidor, o el heroe ya se encuentra en la BD'
-            );
-          }
-        },
-        error: (err) => console.log(err),
-      });
-
-      this.heroe = {
-        superhero: '',
-        alter_ego: '',
-        characters: '',
-        first_appearance: '',
-        publisher: Publisher.DCComics,
-        imageId: '',
-      };
-    } else {
-      if (this.heroe.superhero.trim().length === 0) {
-        return;
-      }
-
-      this.heroeSerive.updateHeroe(this.heroe, this.heroe.id).subscribe({
-        next: () => {
-          this.router.navigate([`/heroe/ver-heroe/${this.heroe.id}`]);
-          this.mostrarSnackBar('Heroe actualizado', 'mat-accent');
-        },
-        error: (err) => console.log(err),
-      });
     }
   }
 

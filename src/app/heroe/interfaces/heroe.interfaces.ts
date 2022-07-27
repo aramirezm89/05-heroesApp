@@ -11,6 +11,7 @@ export interface Heroe {
 
 
 export enum Publisher {
+  default = '',
   DCComics = 'DC Comics',
   MarvelComics = 'Marvel Comics'
 }

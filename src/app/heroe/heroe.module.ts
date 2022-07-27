@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms'
+import {ReactiveFormsModule,FormsModule} from '@angular/forms'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HeroeRoutingModule } from './heroe-routing.module';
@@ -33,6 +33,7 @@ import { ConfirmarComponent } from './components/confirmar/confirmar.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HeroeRoutingModule,
     FlexLayoutModule,
     MaterialModule,
