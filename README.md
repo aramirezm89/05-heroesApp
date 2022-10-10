@@ -7,6 +7,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ##BackEnd
 El backend de esta apicacion esta realizado en lenguaje C# y como base de datos Mongo DB
+*ver repositorio:
+https://github.com/aramirezm89/HeroeAPICSharp
 
 ## Development server
 
